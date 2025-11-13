@@ -8,7 +8,7 @@ function productListTemplate(product) {
         <img src="${product.Image}" alt="${product.NameWithoutBrand}" />
         <p>Price: ${product.FinalPrice.toFixed(2)}</p>
         <p>Color: ${product.Colors[0].ColorName}</p>
-        <a href="product.html?product=${product.Id}">View Details</a>
+        <a href="product_pages/?products=${product.Id}">View Details</a>
     </li>
     `;
 }
