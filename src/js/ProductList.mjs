@@ -3,11 +3,10 @@ import { renderListWithTemplate } from "./utils.mjs";
 function productListTemplate(product) {
     return `
     <li class="product-card">
-        href="product_pages/?products=${product.Id}"    
         <h2>${product.Brand.Name}</h2>
         <h3>${product.NameWithoutBrand}</h3>
         <img src="${product.Image}" alt="${product.NameWithoutBrand}" />
-        <p>Price: ${product.FinalPrice}</p>
+        <p>Price: ${product.FinalPrice.toFixed(2)}</p>
         <p>Color: ${product.Colors[0].ColorName}</p>
         <a href="product.html?product=${product.Id}">View Details</a>
     </li>
@@ -15,7 +14,7 @@ function productListTemplate(product) {
 }
 
 export default class ProductList {
-    constructor(category) {
+    constructor(category, dataSource, listElement) {
         // passing this information to make the class as reusable as possible
         // Being able to define these things when you use the class will make it very flexible
         this.category = category;
