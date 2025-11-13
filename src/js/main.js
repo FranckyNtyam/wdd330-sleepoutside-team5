@@ -10,9 +10,5 @@ const dataSource = new ProductData("tents");
 // create the product list
 const productList = new ProductList("Tents", dataSource, element);
 
-
-// fetch and log all products for debugging
-dataSource.getData().then((products) => console.log(products));
-
 // initialize the product list
 productList.init();
