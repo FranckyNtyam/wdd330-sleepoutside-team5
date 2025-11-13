@@ -8,8 +8,8 @@ export function getLocalStorage(key) {
   const data = JSON.parse(localStorage.getItem(key));
   if (data && Array.isArray(data)) {
     return data;
-}
-  return [];
+  }
+  return []; //fallback to returning an empty array
 }
 // save data to local storage
 export function setLocalStorage(key, data) {
