@@ -11,6 +11,24 @@ function renderCartContents() {
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
 }
 
+<<<<<<< Updated upstream
+=======
+// Select the product list container for event delegation in this format to handle if no items exist in cart or DOM not ready
+const productList = document.querySelector(".product-list");
+// Event delegation for remove icons
+if (productList) {
+  productList.addEventListener("click", function (e) {
+    if (e.target.classList.contains("remove-icon")) {
+      const idToRemove = e.target.dataset.id;
+      let cartItems = getLocalStorage("so-cart") || [];
+      cartItems = cartItems.filter((item) => item.Id !== idToRemove);
+      localStorage.setItem("so-cart", JSON.stringify(cartItems));
+      renderCartContents();
+    }
+  });
+}
+
+>>>>>>> Stashed changes
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
