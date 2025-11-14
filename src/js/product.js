@@ -7,9 +7,6 @@ const dataSource = new ProductData("tents");
 const product = new ProductDetails(productId, dataSource);
 product.init();
 
-
-
-
 // import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 // import ProductData from "./ProductData.mjs";
 // // use setLocalStorage imported from utils.mjs

@@ -1,7 +1,6 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, getParam } from "./utils.mjs";
 
 export default class ProductDetails {
-
   constructor(productId, dataSource) {
     this.productId = productId;
     this.product = {};
@@ -10,6 +9,7 @@ export default class ProductDetails {
 
   async init() {
     // use the datasource to get the details for the current product.
+    // await the Promise returned by findProductById (use await or .then() to process it)
     this.product = await this.dataSource.findProductById(this.productId);
     // the product details are needed before rendering the HTML
     this.renderProductDetails();
