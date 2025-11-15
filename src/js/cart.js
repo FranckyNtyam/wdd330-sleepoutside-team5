@@ -11,6 +11,14 @@ function renderCartContents() {
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
 }
 
+// Update cart count badge
+export function updateCartCount(count) {
+  const cartCountElement = document.getElementById("cart-count");
+  
+  // Update the count text  
+    cartCountElement.textContent = count;
+
+}
 // Select the product list container for event delegation in this format to handle if no items exist in cart or DOM not ready
 const productList = document.querySelector(".product-list"); 
 // Event delegation for remove icons
@@ -46,3 +54,17 @@ function cartItemTemplate(item) {
 }
 
 renderCartContents();
+// Initial cart count update on page load
+const initialCartItems = getLocalStorage("so-cart") || [];
+updateCartCount(initialCartItems.length);
+
+// Update cart count when "Add to Cart" button is clicked
+const addToCart = document.getElementById("add-to-cart");
+if (addToCart) {
+  addToCart.addEventListener("click", function () {
+    const cartItems = getLocalStorage("so-cart") || [];
+    updateCartCount(cartItems.length);
+  });
+} 
+
+
