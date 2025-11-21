@@ -14,26 +14,24 @@ function renderCartContents() {
 // Update cart count badge
 export function updateCartCount(count) {
   const cartCountElement = document.getElementById("cart-count");
-  
-  // Update the count text  
-    cartCountElement.textContent = count;
 
+  // Update the count text
+  cartCountElement.textContent = count;
 }
 // Select the product list container for event delegation in this format to handle if no items exist in cart or DOM not ready
-const productList = document.querySelector(".product-list"); 
+const productList = document.querySelector(".product-list");
 // Event delegation for remove icons
 if (productList) {
   productList.addEventListener("click", function (e) {
     if (e.target.classList.contains("remove-icon")) {
       const idToRemove = e.target.dataset.id;
       let cartItems = getLocalStorage("so-cart") || [];
-      cartItems = cartItems.filter(item => item.Id !== idToRemove);
+      cartItems = cartItems.filter((item) => item.Id !== idToRemove);
       localStorage.setItem("so-cart", JSON.stringify(cartItems));
       renderCartContents();
     }
   });
 }
-
 
 function cartItemTemplate(item) {
   // adding aria-label and role to remove icon for accessibility to the html span element
@@ -65,6 +63,4 @@ if (addToCart) {
     const cartItems = getLocalStorage("so-cart") || [];
     updateCartCount(cartItems.length);
   });
-} 
-
-
+}
