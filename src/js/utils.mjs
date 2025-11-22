@@ -40,3 +40,52 @@ export function renderListWithTemplate(template, parentElement, list, position =
   }
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
+
+export function renderWithTemplate(template, parentElement, data, callback) {
+  parentElement.innerHTML = template;
+  if (callback) {
+    callback(data);
+  }
+}
+
+async function loadTemplate(path) {
+  const res = await fetch(path);
+  const template = await res.text();
+  return template;
+}
+
+// load header and footer
+export async function loadHeaderFooter() {
+  // load the header
+  const header = await fetch("/partials/header.html");
+  const headerText = await header.text();
+  document.querySelector("#main-header").innerHTML = headerText;
+  // load the footer
+  const footer = await fetch("/partials/footer.html");
+  const footerText = await footer.text();
+  document.querySelector("#main-footer").innerHTML = footerText;
+
+  //update cart count in header
+  const cartItems = getLocalStorage("so-cart") || [];
+  const cartCount = cartItems.length;
+  const cartCountElement = document.getElementById("cart-count");
+  if (cartCountElement) {
+    cartCountElement.textContent = cartCount;
+  }
+
+}
+
+// helper function for cart count update
+export function updateCartCount() {
+  const cartItems = JSON.parse(localStorage.getItem("so-cart")) || [];
+  const countElement = document.getElementById("cart-count");
+
+  if (countElement) {
+    // If using quantities:
+    const totalQty = cartItems.reduce(
+      (sum, item) => sum + (Number(item.quantity ?? 1)),
+      0
+    );
+    countElement.textContent = totalQty;
+  }
+}
